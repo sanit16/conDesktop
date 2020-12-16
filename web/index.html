@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="desktop">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>desktop</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js');
+      });
+    }
+    var firebaseConfig = {
+    apiKey: "AIzaSyBE4Mjajcjr2p6v9okcYaqzcdLtdivjjsg",
+    authDomain: "construct-c883c.firebaseapp.com",
+    databaseURL: "https://construct-c883c.firebaseio.com",
+    projectId: "construct-c883c",
+    storageBucket: "construct-c883c.appspot.com",
+    messagingSenderId: "264811381201",
+    appId: "1:264811381201:web:9ad8d82a42db11d91de0f0",
+    measurementId: "G-4X7FXLNJJV"
+  };
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  </script>
+
+  <script src="main.dart.js" type="application/javascript"></script>
+</body>
+</html>
