@@ -16,6 +16,7 @@ class _CategoryChildListState extends State<CategoryChildList> {
   @override
   Widget build(BuildContext context) {
     return  Container(
+      margin: EdgeInsets.only(top: 5,bottom: 5),
       height: 30,
       child: BlocBuilder<GroupBloc,GroupState>(
         builder: (context,state){
@@ -64,11 +65,11 @@ class GroupItem extends StatelessWidget {
                   child: Text(
                     groupList[index].name,
                     style: TextStyle(
-                        fontSize: 16, color: ThemeColor.negative),
+                        fontSize: 16, color: ThemeColor.positive),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                borderSide: BorderSide(color: ThemeColor.negative),
+                borderSide: BorderSide(color: ThemeColor.positive),
                 shape: StadiumBorder()
             ),
 

@@ -1,4 +1,5 @@
 import 'package:desktop/theme/theme_color.dart';
+import 'package:desktop/wigget/appbar_buider.dart';
 import 'package:flutter/material.dart';
 
 class SignUpStep extends StatefulWidget {
@@ -11,34 +12,8 @@ class _SignUpStepState extends State<SignUpStep> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ThemeColor.positive,
-        title: const Text('ลงทะเบียนใช้งาน'),
-        actions: <Widget>[
+      appBar: buildAppBar('ลงทะเบียนใช้งาน'),
 
-          IconButton(
-            icon: const Icon(Icons.navigate_next),
-            tooltip: 'Go to the next page',
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (BuildContext context) {
-                  return Scaffold(
-                    appBar: AppBar(
-                      title: const Text('Next page'),
-                    ),
-                    body: const Center(
-                      child: Text(
-                        'This is the next page',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                    ),
-                  );
-                },
-              ));
-            },
-          ),
-        ],
-      ),
       body: Container(
         height:MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -61,7 +36,7 @@ class _SignUpStepState extends State<SignUpStep> {
                               onPressed: onStepCancel,
                               child: Container(
                                   margin: const EdgeInsets.only(top: 10, bottom: 10),
-                                  child: Text('ยกเลิก',
+                                  child: Text('ย้อนกลับ',
                                       style: TextStyle(
                                           fontSize: 18, color: ThemeColor.positive))),
                               textColor: ThemeColor.white,

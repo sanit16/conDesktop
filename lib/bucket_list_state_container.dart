@@ -19,55 +19,73 @@ class BucketListStateContainer extends StatelessWidget {
       itemBuilder: (context, index) {
 
           return Container(
-            margin: EdgeInsets.only(top: 10),
+            margin: EdgeInsets.only(top: 10,right: 10),
             height: 50,
             child: Container(
               decoration: BoxDecoration(
                   border: Border.all(color: ThemeColor.positive),
-                  borderRadius: BorderRadius.circular(30)),
+                  borderRadius: BorderRadius.circular(2)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                      padding: EdgeInsets.only(left: 5),
-                      child: Text(
-                        bucketList[index].name,
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                      )),
-                  ButtonTheme(
-                    buttonColor: ThemeColor.white,
-                    minWidth: 30,
-                    height: 30,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          side: BorderSide(
-                              color: ThemeColor.positive, width: 2)),
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.add,
-                        color: ThemeColor.positive,
+                  Expanded(
+                    flex: 6,
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10),
+                        child: Text(
+                          bucketList[index].name,
+
+                            style: TextStyle(color: ThemeColor.positive, fontSize: 16),
+                        )),
+                  ),
+
+                  Expanded(
+                    flex: 1,
+                      child : Center(child: Text("11",         style: TextStyle(color: ThemeColor.positive, fontSize: 16),))),
+
+                  Expanded(    flex: 2,child: Center(child: Text("2210",         style: TextStyle(color: ThemeColor.positive, fontSize: 16),))),
+                  Expanded(
+                    flex: 1,
+                    child: Center(
+                      child: ButtonTheme(
+                        buttonColor: ThemeColor.white,
+                        minWidth: 30,
+                        height: 30,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              side: BorderSide(
+                                  color: ThemeColor.positive, width: 2)),
+                          onPressed: () {},
+                          child: Icon(
+                            Icons.add,
+                            color: ThemeColor.positive,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                  Center(child: Text("11")),
-                  ButtonTheme(
-                    buttonColor: ThemeColor.white,
-                    minWidth: 30,
-                    height: 30,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          side: BorderSide(
-                              color: ThemeColor.negative, width: 2)),
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.remove,
-                        color: ThemeColor.negative,
+                  Expanded(
+                    flex: 1,
+                    child: Center(
+                      child: ButtonTheme(
+                        buttonColor: ThemeColor.white,
+                        minWidth: 30,
+                        height: 30,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              side: BorderSide(
+                                  color: ThemeColor.negative, width: 2)),
+                          onPressed: () {},
+                          child: Icon(
+                            Icons.remove,
+                            color: ThemeColor.negative,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                  Center(child: Text("2210")),
                 ],
               ),
             ),

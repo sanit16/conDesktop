@@ -43,9 +43,8 @@ class _CategoryState extends State<Category> {
 
     return Container(
       height: 40,
-      color: ThemeColor.white,
+      color: ThemeColor.positive,
       padding: const EdgeInsets.only(top: 5, bottom: 5),
-
       child: FutureBuilder(
         builder: (context, snapshot) {
           return ListView.builder(
@@ -54,26 +53,31 @@ class _CategoryState extends State<Category> {
             itemBuilder: (context, index) {
               if (_productGroup != null) {
                 return Container(
-                  margin: const EdgeInsets.only(left: 5, right: 5),
-                  child: OutlineButton(
-                      onPressed: () => {
-                            productBloc
-                                .add(FetchGroup(_productGroup[index].name))
-                          },
-                      padding: EdgeInsets.only(left: 5, right: 5),
-                      child: Container(
-                        margin: const EdgeInsets.only(left: 10, right: 10),
-                        child: Text(
-                          _productGroup[index].name,
-                          style: TextStyle(
-                              fontSize: 16, color: ThemeColor.positive),
-                          textAlign: TextAlign.center,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 1,
+                        height: double.infinity,
+                        child: const DecoratedBox(
+                          decoration: const BoxDecoration(color: Colors.white),
                         ),
                       ),
-                      borderSide: BorderSide(color: ThemeColor.positive),
-                      shape: StadiumBorder()
+                      FlatButton(
+                        onPressed: () => {
+                          productBloc.add(FetchGroup(_productGroup[index].name))
+                        },
+                        child: Container(
+                          child: Text(
+                            _productGroup[index].name,
+                            style: TextStyle(
+                                fontSize: 16, color: ThemeColor.white),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        color: ThemeColor.positive,
+                      ),
+                    ],
                   ),
-
                 );
               } else {
                 return Container();

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:desktop/bloc/product_bloc.dart';
 import 'package:desktop/data_object/product/product.dart';
+import 'package:desktop/dialog/edit_product_dialog.dart';
 import 'package:desktop/service/api_manager.dart';
 import 'package:desktop/event/main_product.dart';
 import 'package:desktop/theme/theme_color.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/product_bloc.dart';
 import 'dialog/add_product_dialog.dart';
+import 'dialog/delete_product_dialog.dart';
 
 class ProductList extends StatefulWidget {
   @override
@@ -85,7 +87,9 @@ class ProductItem extends StatelessWidget {
                     margin: EdgeInsets.all(10),
                     child: InkWell(
                       onTap: () {
-                        AddProductDialog(context);
+                        DeleteProductDialog(context);
+                        // EditProductDialog(context);
+                        // AddProductDialog(context);
                         // Function is executed on tap.
                       },
                       child: Column(

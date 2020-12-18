@@ -1,5 +1,7 @@
 import 'package:desktop/data_object/product/product.dart';
 import 'package:desktop/bucket_list_state_container.dart';
+import 'package:desktop/screen/chat_customer.dart';
+import 'package:desktop/screen/sale_confirm.dart';
 import 'package:desktop/service/api_manager.dart';
 import 'package:desktop/event/main_product.dart';
 import 'package:desktop/theme/theme_color.dart';
@@ -121,7 +123,8 @@ class _BucketListState extends State<BucketList> {
                       color: ThemeColor.positive,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30))),
-                      onPressed: () {},
+                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SaleConfirm())),
+
                     ),
                   ),
                   SizedBox(
@@ -157,7 +160,7 @@ class _BucketListState extends State<BucketList> {
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
-                  onPressed: () {},
+                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ChatCustomer())),
                   child: Icon(
                     Icons.mail_outline_outlined,
                     color: Colors.white,
