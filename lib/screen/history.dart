@@ -1,3 +1,4 @@
+import 'package:desktop/theme/theme_color.dart';
 import 'package:desktop/wigget/appbar_buider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class _HistoryState extends State<History> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar("ประวัตการขาย"),
+      appBar: buildAppBar("ประวัตการขาย",ThemeColor.positive),
       body: Container(
         child:  DataTable(
           columns: const <DataColumn>[

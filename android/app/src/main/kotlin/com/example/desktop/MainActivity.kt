@@ -1,4 +1,4 @@
-package com.example.desktop
+package com.plakadee.kinshop
 
 import io.flutter.embedding.android.FlutterActivity
 

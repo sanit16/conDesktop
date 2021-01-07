@@ -16,8 +16,8 @@ class Category extends StatefulWidget {
 
 class _CategoryState extends State<Category> {
   List<Productgroup> _productGroup = new List<Productgroup>();
-
   List<String> litems = ["1", "2", "Third", "4"];
+  int stateClick = 0;
 
   @override
   void initState() {
@@ -29,8 +29,6 @@ class _CategoryState extends State<Category> {
     API_Manager.getProductHead().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
-
-        print(list);
         _productGroup =
             list.map((model) => Productgroup.fromJson(model)).toList();
       });
@@ -64,6 +62,7 @@ class _CategoryState extends State<Category> {
                       ),
                       FlatButton(
                         onPressed: () => {
+                          setClick(index),
                           productBloc.add(FetchGroup(_productGroup[index].name))
                         },
                         child: Container(
@@ -74,7 +73,7 @@ class _CategoryState extends State<Category> {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        color: ThemeColor.positive,
+                        color:stateClick==index?ThemeColor.negative: ThemeColor.positive,
                       ),
                     ],
                   ),
@@ -87,5 +86,11 @@ class _CategoryState extends State<Category> {
         },
       ),
     );
+  }
+
+  setClick(int index) {
+    setState(() {
+      stateClick = index;
+    });
   }
 }

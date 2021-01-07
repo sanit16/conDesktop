@@ -12,7 +12,7 @@ class _SaleConfirmState extends State<SaleConfirm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar("ยืนยันการขาย"),
+      appBar: buildAppBar("ยืนยันการขาย",ThemeColor.positive),
       body: Container(
         child: Row(
           children: [

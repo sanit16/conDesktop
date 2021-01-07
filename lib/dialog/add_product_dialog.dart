@@ -2,26 +2,35 @@ import 'package:desktop/theme/theme_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
+import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 void AddProductDialog(BuildContext context) {
+
   Alert(
       context: context,
+      style: AlertStyle(titleStyle: TextStyle(color: ThemeColor.positive)),
       title: "เพิ่มสินค้า",
       content: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(decoration: inputDecoration('ชื่อสินค้า')),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(decoration: inputDecoration('ชื่อสินค้า')),
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(decoration: inputDecoration('ราคาขาย')),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(decoration: inputDecoration('ราคาขาย')),
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              obscureText: true,
-              decoration: inputDecoration('สต้อก'),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                obscureText: true,
+                decoration: inputDecoration('สต้อก'),
+              ),
             ),
           ),
         ],
@@ -38,7 +47,7 @@ void AddProductDialog(BuildContext context) {
           onPressed: () => Navigator.pop(context),
           child: Text(
             "บันทึก",
-            style: TextStyle(color: Colors.white, fontSize: 20),
+            style: TextStyle(color: ThemeColor.white, fontSize: 20),
           ),
           color: ThemeColor.positive,
           radius: BorderRadius.circular(15),

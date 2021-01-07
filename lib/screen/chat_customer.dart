@@ -12,7 +12,7 @@ class _ChatCustomerState extends State<ChatCustomer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar("กล่องข้อความ"),
+      appBar: buildAppBar("กล่องข้อความ",ThemeColor.positive),
       body: Container(
         child: Column(
           children: [

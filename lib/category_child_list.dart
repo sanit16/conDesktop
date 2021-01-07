@@ -37,10 +37,17 @@ class _CategoryChildListState extends State<CategoryChildList> {
   }
 
 }
-class GroupItem extends StatelessWidget {
+class GroupItem extends StatefulWidget {
   List<Productgroup> groupList;
 
   GroupItem(this.groupList);
+
+  @override
+  _GroupItemState createState() => _GroupItemState();
+}
+
+class _GroupItemState extends State<GroupItem> {
+  int stateClick = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -48,28 +55,32 @@ class GroupItem extends StatelessWidget {
     return Container(
       color: ThemeColor.white,
       child:ListView.builder(
-      itemCount: groupList.length,
+      itemCount: widget.groupList.length,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
-        if (groupList != null) {
+        if (widget.groupList != null) {
           return Container(
             margin: const EdgeInsets.only(left: 5, right: 5),
             child: OutlineButton(
+
                 onPressed: () => {
-                  productBloc.add(FetchProduct(groupList[index].head,groupList[index].name))
+                  setClick(index),
+                  productBloc.add(FetchProduct(widget.groupList[index].head,widget.groupList[index].name))
 
                 },
                 padding: EdgeInsets.only(left: 5, right: 5),
                 child: Container(
                   margin: const EdgeInsets.only(left: 10, right: 10),
                   child: Text(
-                    groupList[index].name,
+
+                    widget.groupList[index].name,
                     style: TextStyle(
-                        fontSize: 16, color: ThemeColor.positive),
+                        fontSize: 16, color:stateClick==index?ThemeColor.negative: ThemeColor.positive),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                borderSide: BorderSide(color: ThemeColor.positive),
+
+                borderSide: BorderSide(color:stateClick==index?ThemeColor.negative: ThemeColor.positive),
                 shape: StadiumBorder()
             ),
 
@@ -81,5 +92,12 @@ class GroupItem extends StatelessWidget {
       },
     ),
     );
+
+  }
+
+  setClick(int index) {
+    setState(() {
+      stateClick = index;
+    });
   }
 }

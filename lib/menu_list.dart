@@ -7,95 +7,130 @@ import 'package:desktop/screen/signup_step.dart';
 import 'package:desktop/service/api_manager.dart';
 import 'package:desktop/theme/theme_color.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dialog/add_product_dialog.dart';
 import 'dialog/test_dialog.dart';
+import 'package:sizer/sizer.dart';
 
-class MenuList extends StatelessWidget {
+class MenuList extends StatefulWidget {
+
+  @override
+  _MenuListState createState() => _MenuListState();
+}
+
+class _MenuListState extends State<MenuList> {
+  String stateClick = '0';
+
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
     return Container(
+
       child: Column(
         children: [
           SizedBox(
-            height: 10,
+            height: 8,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ButtonTheme(
-                buttonColor: ThemeColor.white,
-                minWidth: 60,
-                height: 60,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      side: BorderSide(color: ThemeColor.positive, width: 2)),
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.add,
-                    color: ThemeColor.positive,
-                  ),
+          FittedBox(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                CircleAvatar(
+                    backgroundColor: stateClick=='1'?ThemeColor.positive: Colors.white,
+                    radius: 30,
+                  child: IconButton(
+                    onPressed: () {
+                      initValue('1');
+
+                    },
+
+                    icon: Icon(
+                      Icons.add,
+                      color:  stateClick=='1'? Colors.white: ThemeColor.positive,
+                      size: 24.0,
+                    ),
+
+                  )
                 ),
-              ),
-              ButtonTheme(
-                buttonColor: ThemeColor.white,
-                minWidth: 60,
-                height: 60,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      side: BorderSide(color: ThemeColor.warning, width: 2)),
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.edit,
-                    color: ThemeColor.warning,
-                  ),
+                CircleAvatar(
+                    backgroundColor: stateClick=='2'?ThemeColor.warning: Colors.white,
+                    radius: 30,
+
+                    child: MaterialButton(
+                      onPressed: () {
+                        initValue('2');
+
+                      },
+                      elevation: 2,
+                      textColor: Colors.white,
+                      child: Center(
+                        child: Icon(
+                          Icons.edit,
+                          color: stateClick=='2'? Colors.white: ThemeColor.warning,
+                          size: 24,
+                        ),
+                      ),
+
+                      padding: EdgeInsets.all(16),
+                      shape: CircleBorder(),
+                    )
                 ),
-              ),
-              ButtonTheme(
-                buttonColor: ThemeColor.white,
-                minWidth: 60,
-                height: 60,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      side: BorderSide(color: ThemeColor.negative, width: 2)),
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.delete,
-                    color: ThemeColor.negative,
-                  ),
+                CircleAvatar(
+                    backgroundColor: stateClick=='3'?ThemeColor.negative: Colors.white,
+                    radius: 30,
+
+                    child:  MaterialButton(
+                    onPressed: () {
+                      initValue('3');
+
+                    },
+
+                    elevation: 2,
+                    textColor: Colors.white,
+                    child: Icon(
+                      Icons.delete,
+                      color:stateClick=='3'? Colors.white: ThemeColor.negative,
+                      size: 24,
+                    ),
+
+                    padding: EdgeInsets.all(16),
+                    shape: CircleBorder(),
+                  )
                 ),
-              ),
-            ],
+
+              ],
+            ),
           ),
           SizedBox(
-            height: 10,
+            height: 8,
           ),
-          SizedBox(
-            width: double.infinity,
+          FittedBox(
             child: Container(
               height: 35,
               child: OutlineButton(
-                  onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUpStep())),
-                  child: Stack(
+                  onPressed: () {
+                    Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SignUpStep()));
+                  }
+
+                  ,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Icon(
-                          Icons.storefront,
-                          color: ThemeColor.positive,
-                        ),
+                      Icon(
+                        Icons.storefront,
+                        color: ThemeColor.positive,
                       ),
-                      Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "ข้อมูลร้านค้า",
-                            style: TextStyle(
-                                fontSize: 18, color: ThemeColor.positive),
-                          ))
+                      SizedBox(width: 5,),
+                      Text(
+                        "ข้อมูลร้าน",
+                        style: TextStyle(
+                            fontSize: 18, color: ThemeColor.positive),
+                      ),
+
                     ],
                   ),
                   highlightedBorderColor: ThemeColor.white,
@@ -105,14 +140,13 @@ class MenuList extends StatelessWidget {
                       borderRadius: new BorderRadius.circular(10))),
             ),
           ),
-          SizedBox(
-            width: double.infinity,
+          FittedBox(
             child: Container(
               height: 35,
               child: OutlineButton(
                   onPressed: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => History())),
-                  child: Stack(
+                  child: Row(
                     children: <Widget>[
                       Align(
                         alignment: Alignment.centerLeft,
@@ -121,10 +155,11 @@ class MenuList extends StatelessWidget {
                           color: ThemeColor.positive,
                         ),
                       ),
+                      SizedBox(width: 5,),
                       Align(
                           alignment: Alignment.center,
                           child: Text(
-                            "ประวัติการขาย",
+                            "ประวัติขาย",
                             style: TextStyle(
                                 fontSize: 18, color: ThemeColor.positive),
                           ))
@@ -137,14 +172,13 @@ class MenuList extends StatelessWidget {
                       borderRadius: new BorderRadius.circular(10))),
             ),
           ),
-          SizedBox(
-            width: double.infinity,
+          FittedBox(
             child: Container(
               height: 35,
               child: OutlineButton(
                   onPressed: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Billing())),
-                  child: Stack(
+                  child: Row(
                     children: <Widget>[
                       Align(
                         alignment: Alignment.centerLeft,
@@ -153,6 +187,7 @@ class MenuList extends StatelessWidget {
                           color: ThemeColor.positive,
                         ),
                       ),
+                      SizedBox(width: 5,),
                       Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -169,14 +204,13 @@ class MenuList extends StatelessWidget {
                       borderRadius: new BorderRadius.circular(10))),
             ),
           ),
-          SizedBox(
-            width: double.infinity,
+          FittedBox(
             child: Container(
               height: 35,
               child: OutlineButton(
                   onPressed: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Delivery())),
-                  child: Stack(
+                  child: Row(
                     children: <Widget>[
                       Align(
                         alignment: Alignment.centerLeft,
@@ -185,6 +219,7 @@ class MenuList extends StatelessWidget {
                           color: ThemeColor.positive,
                         ),
                       ),
+                      SizedBox(width: 5,),
                       Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -202,13 +237,12 @@ class MenuList extends StatelessWidget {
             ),
           ),
           Spacer(),
-          SizedBox(
-            width: double.infinity,
+          FittedBox(
             child: Container(
               height: 35,
               child: OutlineButton(
                   onPressed: () => LogOut(context),
-                  child: Stack(
+                  child: Row(
                     children: <Widget>[
                       Align(
                         alignment: Alignment.centerLeft,
@@ -217,6 +251,7 @@ class MenuList extends StatelessWidget {
                           color: ThemeColor.positive,
                         ),
                       ),
+                      SizedBox(width: 5,),
                       Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -237,4 +272,31 @@ class MenuList extends StatelessWidget {
       ),
     );
   }
+
+  void SiginUp() {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    _auth
+        .createUserWithEmailAndPassword(email: 'sanit.v@gmail.com', password: 'password1234')
+        .then((data) {
+      print("Registation Success");
+      print(data.user.uid);
+      return true;
+    }).catchError((e) {
+      print("Error: " + e);
+      return false;
+    });
+  }
+
+  void initValue(String s) async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    stateClick == s? prefs.setString('stateClick', '0'): prefs.setString('stateClick', s);
+
+    setState(() {
+
+      stateClick==s? stateClick ='0':  stateClick = s;
+    });
+
+  }
+
+
 }

@@ -1,3 +1,4 @@
+import 'package:desktop/theme/theme_color.dart';
 import 'package:desktop/wigget/appbar_buider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class _BillingState extends State<Billing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildAppBar("ตั้งค่าข้อมูลการออกบิล"),
+        appBar: buildAppBar("ตั้งค่าข้อมูลการออกบิล",ThemeColor.positive),
         body: Container());
   }
 }

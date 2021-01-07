@@ -32,7 +32,7 @@ class Product {
     head = json['head'];
     image = json['image'];
     name = json['name'];
-    price = json['price'];
+    price =  json['price'].toDouble();
     qrcode = json['qrcode'];
     star = json['star'];
     delivery = json['delivery'];

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "264811381201",
+    "firebase_url": "https://construct-c883c.firebaseio.com",
+    "project_id": "construct-c883c",
+    "storage_bucket": "construct-c883c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264811381201:android:1b86ba9b4d9f89d11de0f0",
+        "android_client_info": {
+          "package_name": "com.plakadee.kinshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264811381201-k12fk8dces72c5bevgb5gtrms5m7gja2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtmEdggcOx5yr8Hi_BwcbmTX-sOk3wrF4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264811381201-k12fk8dces72c5bevgb5gtrms5m7gja2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

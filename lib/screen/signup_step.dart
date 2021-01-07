@@ -1,18 +1,43 @@
 import 'package:desktop/theme/theme_color.dart';
 import 'package:desktop/wigget/appbar_buider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 class SignUpStep extends StatefulWidget {
+
   @override
   _SignUpStepState createState() => _SignUpStepState();
 }
 
 class _SignUpStepState extends State<SignUpStep> {
   int _currentStep = 0;
+  TextEditingController companyName = TextEditingController();
+  TextEditingController taxNumber = TextEditingController();
+  TextEditingController aboutCompany = TextEditingController();
+  TextEditingController phoneNumber = TextEditingController();
+  TextEditingController emailAddress = TextEditingController();
+  TextEditingController adress = TextEditingController();
+  TextEditingController district = TextEditingController();
+  TextEditingController city = TextEditingController();
+  TextEditingController province = TextEditingController();
+  TextEditingController country = TextEditingController();
+  TextEditingController zipcode = TextEditingController();
+
+  TextEditingController distanceDelivery = TextEditingController();
+  TextEditingController minPriceDelivery = TextEditingController();
+  TextEditingController deliveryRemark = TextEditingController();
+  TextEditingController remark = TextEditingController();
+
+
+  TextEditingController password = TextEditingController();
+  TextEditingController passwordAgain = TextEditingController();
+
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar('ลงทะเบียนใช้งาน'),
+      appBar: buildAppBar('ลงทะเบียนใช้งาน',ThemeColor.positive),
 
       body: Container(
         height:MediaQuery.of(context).size.height,
@@ -88,7 +113,8 @@ class _SignUpStepState extends State<SignUpStep> {
               });
             },
             onStepContinue: (){
-              setState(() {
+              setState(()  {
+               createUser();
                 if (this._currentStep<this._signUpStep().length-1) {
                   this._currentStep = this._currentStep+1;
 
@@ -356,5 +382,22 @@ class _SignUpStepState extends State<SignUpStep> {
                               color: ThemeColor.positive
                           )
                       );
+  }
+
+  void createUser()  async{
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: "mongmang.vak@gmail.com",
+          password: "password"
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }

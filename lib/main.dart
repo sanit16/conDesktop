@@ -9,39 +9,68 @@ import 'package:desktop/menu_list.dart';
 import 'package:desktop/product_list.dart';
 import 'package:desktop/repository/product_repo.dart';
 import 'package:desktop/event/main_product.dart';
+import 'package:desktop/screen/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'bloc/group_bloc.dart';
 
-void main() {
-  runApp(MyApp());
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+ await Firebase.initializeApp();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  var isLoggedIn = (prefs.getBool('isLoggedIn') == null) ? false : prefs.getBool('isLoggedIn');
+  runApp( MyApp(isLoggedIn) );
+  // runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  bool loggedIn;
+
+  MyApp(this.loggedIn);
+
   @override
   State<StatefulWidget> createState() {
-    return _MainApp();
+    return _MainApp(loggedIn);
   }
 }
 
 class _MainApp extends State<MyApp> {
   MainProduct mainProduct = new MainProduct();
+  bool loggedIn;
+
+  _MainApp(this.loggedIn);
+
+  @override
+  void initState(){
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+  }
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: "ConstructShop",
       home: Scaffold(
-          appBar: PreferredSize(
-              preferredSize: Size.fromHeight(0),
-              child: AppBar(
-                // Here we create one to set status bar color
-                backgroundColor: Colors
-                    .black, // Set any color of status bar you want; or it defaults to your theme's primary color
-              )),
           backgroundColor: Colors.white,
-          body: MainAppBlocProvider()),
+          body: (loggedIn==false)? Login():MainAppBlocProvider()),
     );
+  }
+
+}
+Future checkAuth( BuildContext context) async {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  if (_auth.currentUser != null) {
+    print("Already singed-in with");
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => MainAppBlocProvider()));
   }
 }

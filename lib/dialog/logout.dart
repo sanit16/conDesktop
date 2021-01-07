@@ -1,8 +1,10 @@
+import 'package:desktop/screen/login.dart';
 import 'package:desktop/theme/theme_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 void LogOut(BuildContext context) async {
   SharedPreferences _prefs = await SharedPreferences.getInstance();
 
@@ -10,7 +12,6 @@ void LogOut(BuildContext context) async {
       context: context,
       style: AlertStyle(titleStyle: TextStyle(color: ThemeColor.negative)),
       title: "ยืนยันการออกจากระบบ",
-
       buttons: [
         DialogButton(
           onPressed: () => Navigator.pop(context),
@@ -20,7 +21,13 @@ void LogOut(BuildContext context) async {
           radius: BorderRadius.circular(15),
         ),
         DialogButton(
-          onPressed: () => _prefs.setBool("Loged", false),
+          onPressed: () {
+            _prefs.setBool("isLoggedIn", false);
+            Navigator.of(context, rootNavigator: true).pop();
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Login()));
+
+          },
           child: Text(
             "ออกจากระบบ",
             style: TextStyle(color: ThemeColor.white, fontSize: 20),
