@@ -98,7 +98,7 @@ class _ProductItemState extends State<ProductItem> {
                     margin: EdgeInsets.all(5),
                     child: InkWell(
                       onTap: () {
-                        showDialogWithState(context);
+                        showDialogWithState(context,widget.productList[index]);
 
                         // Function is executed on tap.
                       },
@@ -155,7 +155,9 @@ class _ProductItemState extends State<ProductItem> {
     );
   }
 
-  void showDialogWithState(BuildContext context) async{
+  void showDialogWithState(BuildContext context,Product product) async{
+
+
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String valueCheck = '0';
 
@@ -168,16 +170,16 @@ class _ProductItemState extends State<ProductItem> {
           break;
         case '1':
         Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AddProductToShop()));
+              MaterialPageRoute(builder: (context) => AddProductToShop(product)));
           break;
         case '2':
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => EditProductScreen()));
+              MaterialPageRoute(builder: (context) => EditProductScreen(product)));
 
           break;
         case '3':
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => DeleteProductScreen()));
+              MaterialPageRoute(builder: (context) => DeleteProductScreen(product)));
 
           break;
 

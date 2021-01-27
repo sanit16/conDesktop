@@ -16,7 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:google_map_location_picker/generated/l10n.dart' as location_picker;
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'bloc/group_bloc.dart';
 
 Future<void> main() async{
@@ -45,18 +46,26 @@ class _MainApp extends State<MyApp> {
 
   _MainApp(this.loggedIn);
 
-  @override
-  void initState(){
-    super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-    ]);
-  }
+
   @override
   Widget build(BuildContext context) {
 
     return MaterialApp(
+      localizationsDelegates: const [
+        location_picker.S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const <Locale>[
+        Locale('en', ''),
+        Locale('ar', ''),
+        Locale('pt', ''),
+        Locale('tr', ''),
+        Locale('es', ''),
+        Locale('it', ''),
+        Locale('ru', ''),
+      ],
       title: "ConstructShop",
       home: Scaffold(
           backgroundColor: Colors.white,

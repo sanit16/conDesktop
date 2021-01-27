@@ -1,13 +1,18 @@
+import 'package:desktop/data_object/product/product.dart';
 import 'package:desktop/theme/theme_color.dart';
 import 'package:desktop/wigget/appbar_buider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DeleteProductScreen extends StatelessWidget {
+  Product product;
+
+  DeleteProductScreen(this.product);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar("ยืนยันการลบสินค้า",ThemeColor.negative),
+      appBar: buildAppBar("ยืนยันการลบสินค้า",ThemeColor.positive),
       body : Container(
 
         child: ListView(
@@ -19,9 +24,9 @@ class DeleteProductScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: Column(children: [
-                    Image.network("https://firebasestorage.googleapis.com/v0/b/catlog-63873.appspot.com/o/ปูน%2Fปูนซีเมนต์%2F8859088302016.jpg?alt=media&token=bb17fc37ee6eb0e9b1b0b89cf4f58b8d5bb83250",
-                      width: 100,
-                      height: 100,
+                    Image.network(product.image,
+                      width: 250,
+                      height: 250,
                     ),
                     OutlineButton(
                       onPressed: null,
@@ -36,18 +41,25 @@ class DeleteProductScreen extends StatelessWidget {
 
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('ชื่อสินค้า'
+                        child: Text(product.name
                         ),
                       ),
                       Padding(
 
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('ราคาขาย'
+                        child: Text( "ราคา : ${product.price.toString()}"
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("สต้อก : ${product.stock.toString()}"
                         ),
                       ),
                       Padding(
+
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('สต้อก'
+                        child: Text("รายละเอียด : ${product.detail.toString()}"
                         ),
                       ),
                       Padding(padding: EdgeInsets.all(8.0),
@@ -60,7 +72,7 @@ class DeleteProductScreen extends StatelessWidget {
                                     child: Text('ลบ',
                                         style: TextStyle(
                                             fontSize: 18, color: ThemeColor.white))),
-                                color: ThemeColor.negative,
+                                color: ThemeColor.positive,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(30))),
                                 onPressed: () {

@@ -6,10 +6,12 @@ class Product {
   String image;
   String name;
   dynamic  price;
+  dynamic  stock;
   String qrcode;
   dynamic  star;
+  dynamic  sold;
   bool delivery;
-  String updatedate;
+  DateTime updatedate;
 
 
   Product(
@@ -20,8 +22,10 @@ class Product {
       this.image,
       this.name,
       this.price,
+      this.stock,
       this.qrcode,
       this.star,
+      this.sold,
       this.delivery,
       this.updatedate);
 
@@ -34,9 +38,11 @@ class Product {
     name = json['name'];
     price =  json['price'].toDouble();
     qrcode = json['qrcode'];
-    star = json['star'];
-    delivery = json['delivery'];
-    updatedate = json['updatedate'];
+    stock = 0.0;
+    star = 0.0;
+    sold = 0.0;
+    delivery = true;
+    updatedate = DateTime.now();
   }
 
   Map<String, dynamic> toJson() {
@@ -49,7 +55,9 @@ class Product {
     data['name'] = this.name;
     data['price'] = this.price;
     data['qrcode'] = this.qrcode;
+    data['stock'] = this.stock;
     data['star'] = this.star;
+    data['sold'] = this.sold;
     data['delivery'] = this.delivery;
     data['updatedate'] = this.updatedate;
     return data;

@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:desktop/data_object/product/product.dart';
 import 'package:desktop/dialog/logout.dart';
 import 'package:desktop/screen/billing.dart';
 import 'package:desktop/screen/delivery.dart';
@@ -14,7 +18,6 @@ import 'dialog/test_dialog.dart';
 import 'package:sizer/sizer.dart';
 
 class MenuList extends StatefulWidget {
-
   @override
   _MenuListState createState() => _MenuListState();
 }
@@ -26,7 +29,6 @@ class _MenuListState extends State<MenuList> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     return Container(
-
       child: Column(
         children: [
           SizedBox(
@@ -36,71 +38,64 @@ class _MenuListState extends State<MenuList> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
-
                 CircleAvatar(
-                    backgroundColor: stateClick=='1'?ThemeColor.positive: Colors.white,
+                    backgroundColor:
+                        stateClick == '1' ? ThemeColor.positive : Colors.white,
                     radius: 30,
-                  child: IconButton(
-                    onPressed: () {
-                      initValue('1');
-
-                    },
-
-                    icon: Icon(
-                      Icons.add,
-                      color:  stateClick=='1'? Colors.white: ThemeColor.positive,
-                      size: 24.0,
-                    ),
-
-                  )
-                ),
+                    child: IconButton(
+                      onPressed: () {
+                        initValue('1');
+                      },
+                      icon: Icon(
+                        Icons.add,
+                        color: stateClick == '1'
+                            ? Colors.white
+                            : ThemeColor.positive,
+                        size: 24.0,
+                      ),
+                    )),
                 CircleAvatar(
-                    backgroundColor: stateClick=='2'?ThemeColor.warning: Colors.white,
+                    backgroundColor:
+                        stateClick == '2' ? ThemeColor.warning : Colors.white,
                     radius: 30,
-
                     child: MaterialButton(
                       onPressed: () {
                         initValue('2');
-
                       },
                       elevation: 2,
                       textColor: Colors.white,
                       child: Center(
                         child: Icon(
                           Icons.edit,
-                          color: stateClick=='2'? Colors.white: ThemeColor.warning,
+                          color: stateClick == '2'
+                              ? Colors.white
+                              : ThemeColor.warning,
                           size: 24,
                         ),
                       ),
-
                       padding: EdgeInsets.all(16),
                       shape: CircleBorder(),
-                    )
-                ),
+                    )),
                 CircleAvatar(
-                    backgroundColor: stateClick=='3'?ThemeColor.negative: Colors.white,
+                    backgroundColor:
+                        stateClick == '3' ? ThemeColor.negative : Colors.white,
                     radius: 30,
-
-                    child:  MaterialButton(
-                    onPressed: () {
-                      initValue('3');
-
-                    },
-
-                    elevation: 2,
-                    textColor: Colors.white,
-                    child: Icon(
-                      Icons.delete,
-                      color:stateClick=='3'? Colors.white: ThemeColor.negative,
-                      size: 24,
-                    ),
-
-                    padding: EdgeInsets.all(16),
-                    shape: CircleBorder(),
-                  )
-                ),
-
+                    child: MaterialButton(
+                      onPressed: () {
+                        initValue('3');
+                      },
+                      elevation: 2,
+                      textColor: Colors.white,
+                      child: Icon(
+                        Icons.delete,
+                        color: stateClick == '3'
+                            ? Colors.white
+                            : ThemeColor.negative,
+                        size: 24,
+                      ),
+                      padding: EdgeInsets.all(16),
+                      shape: CircleBorder(),
+                    )),
               ],
             ),
           ),
@@ -113,10 +108,8 @@ class _MenuListState extends State<MenuList> {
               child: OutlineButton(
                   onPressed: () {
                     Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SignUpStep()));
-                  }
-
-                  ,
+                        MaterialPageRoute(builder: (context) => SignUpStep()));
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
@@ -124,13 +117,14 @@ class _MenuListState extends State<MenuList> {
                         Icons.storefront,
                         color: ThemeColor.positive,
                       ),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       Text(
                         "ข้อมูลร้าน",
-                        style: TextStyle(
-                            fontSize: 18, color: ThemeColor.positive),
+                        style:
+                            TextStyle(fontSize: 18, color: ThemeColor.positive),
                       ),
-
                     ],
                   ),
                   highlightedBorderColor: ThemeColor.white,
@@ -155,7 +149,9 @@ class _MenuListState extends State<MenuList> {
                           color: ThemeColor.positive,
                         ),
                       ),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -187,7 +183,9 @@ class _MenuListState extends State<MenuList> {
                           color: ThemeColor.positive,
                         ),
                       ),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -208,8 +206,12 @@ class _MenuListState extends State<MenuList> {
             child: Container(
               height: 35,
               child: OutlineButton(
-                  onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Delivery())),
+                  onPressed: () async {
+                    getData();
+
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => Delivery()));
+                  },
                   child: Row(
                     children: <Widget>[
                       Align(
@@ -219,7 +221,9 @@ class _MenuListState extends State<MenuList> {
                           color: ThemeColor.positive,
                         ),
                       ),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -251,7 +255,9 @@ class _MenuListState extends State<MenuList> {
                           color: ThemeColor.positive,
                         ),
                       ),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -276,7 +282,8 @@ class _MenuListState extends State<MenuList> {
   void SiginUp() {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     _auth
-        .createUserWithEmailAndPassword(email: 'sanit.v@gmail.com', password: 'password1234')
+        .createUserWithEmailAndPassword(
+            email: 'sanit.v@gmail.com', password: 'password1234')
         .then((data) {
       print("Registation Success");
       print(data.user.uid);
@@ -287,16 +294,29 @@ class _MenuListState extends State<MenuList> {
     });
   }
 
-  void initValue(String s) async{
+  void initValue(String s) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    stateClick == s? prefs.setString('stateClick', '0'): prefs.setString('stateClick', s);
+    stateClick == s
+        ? prefs.setString('stateClick', '0')
+        : prefs.setString('stateClick', s);
 
     setState(() {
-
-      stateClick==s? stateClick ='0':  stateClick = s;
+      stateClick == s ? stateClick = '0' : stateClick = s;
     });
-
   }
 
+  void getData() async{
+    List<Product> productList = [];
 
+    var user = FirebaseAuth.instance.currentUser.uid;
+    var date = DateTime.now();
+    var ref = FirebaseFirestore.instance.collection("store");
+   var data = await ref.doc(user).collection('product').get();
+    data.docs.forEach((element) {
+      productList.add(Product.fromJson(element.data()));
+    });
+    productList.forEach((element) {
+      print(element.name);
+    });
+  }
 }

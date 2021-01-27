@@ -22,10 +22,10 @@ class _BucketListState extends State<BucketList> {
   @override
   Widget build(BuildContext context) {
     List<Product> bucketList = new List<Product>();
-    bucketList.add(new Product("description", "detail", "group", "head",
-        "image", "name", 15.0, "qrCode", "5", true, "updateDate"));
-    bucketList.add(new Product("description", "detail", "group", "head",
-        "image", "name2", 10.0, "qrCode", "5", true, "updateDate"));
+    // bucketList.add(new Product("description", "detail", "group", "head",
+    //     "image", "name", 15.0, "qrCode", "5", true, "updateDate"));
+    // bucketList.add(new Product("description", "detail", "group", "head",
+    //     "image", "name2", 10.0, "qrCode", "5", true, "updateDate"));
     return Column(
       children: [
         Expanded(
